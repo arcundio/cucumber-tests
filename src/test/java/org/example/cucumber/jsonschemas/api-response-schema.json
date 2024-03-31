@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "RESTful API Responses Schema",
+  "description": "this schema describes the potential responses of a RESTful API",
+  "type": "object",
+  "properties": {
+    "status": {
+      "description": "the keyword for the http status",
+      "type": "string"
+    },
+    "error": {
+      "description": "if false, the request was solved properly; otherwise, something went wrong",
+      "type": "boolean"
+    },
+    "response": {
+      "description": "boilerplate variable for various kinds of information: errors, confirmation messages and other json formatted responses.",
+      "type": "string"
+    }
+  },
+  "required": ["status", "error", "response"]
+}
