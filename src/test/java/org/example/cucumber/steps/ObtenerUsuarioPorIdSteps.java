@@ -33,7 +33,7 @@ public class ObtenerUsuarioPorIdSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         getRequest = HttpRequest.newBuilder()
                 .uri(new URI("http://"+ipAdress+"/usuarios/"+idUsuario))

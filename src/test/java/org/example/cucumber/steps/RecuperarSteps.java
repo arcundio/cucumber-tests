@@ -34,7 +34,7 @@ public class RecuperarSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
 
         postRequest = HttpRequest.newBuilder()

@@ -59,7 +59,7 @@ public class ActualizarClaveSteps {
         Dotenv dotenv = Dotenv.load();
 
         ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
@@ -104,7 +104,7 @@ public class ActualizarClaveSteps {
 
         Dotenv dotenv = Dotenv.load();
         ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")

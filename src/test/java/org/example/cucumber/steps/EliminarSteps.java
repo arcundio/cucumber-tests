@@ -40,7 +40,7 @@ public class EliminarSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
 
         deleteRequest = HttpRequest.newBuilder()
@@ -87,7 +87,7 @@ public class EliminarSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         deleteRequest = HttpRequest.newBuilder()
                 .uri(new URI("http://"+ipAdress+"/usuarios/"+idUsuario))

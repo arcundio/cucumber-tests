@@ -38,7 +38,7 @@ public class LoginSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         postRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
@@ -72,7 +72,7 @@ public class LoginSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         postRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")

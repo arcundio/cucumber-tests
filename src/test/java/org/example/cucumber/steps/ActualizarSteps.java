@@ -55,7 +55,7 @@ public class ActualizarSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
@@ -92,7 +92,7 @@ public class ActualizarSteps {
         Dotenv dotenv = Dotenv.load();
 
         String ipAdress = dotenv.get("target_ip");
-        ipAdress += "18082";
+        ipAdress += ":18082";
 
 
         putRequest = HttpRequest.newBuilder()
