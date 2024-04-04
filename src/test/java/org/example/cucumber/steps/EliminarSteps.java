@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.cucumber.helperclasses.BearerTokenGenerator;
 import org.example.cucumber.validation.JsonValidator;
 
@@ -36,9 +37,15 @@ public class EliminarSteps {
     @When("se envia una solicitud de eliminar usuario")
     public void seEnviaUnaSolicitudDeEliminarUsuario() throws URISyntaxException, IOException, InterruptedException {
 
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
+
         deleteRequest = HttpRequest.newBuilder()
                 .header("Authorization", "Bearer "+jwtToken)
-                .uri(new URI("http://localhost:18082/usuarios/"+idUsuario))
+                .uri(new URI("http://"+ipAdress+"/usuarios/"+idUsuario))
                 .DELETE()
                 .build();
 
@@ -77,8 +84,13 @@ public class EliminarSteps {
     @When("se envia una solicitud de eliminar usuario sin el header Authorization")
     public void seEnviaUnaSolicitudDeEliminarUsuarioSinElHeaderAuthorization() throws URISyntaxException, IOException, InterruptedException {
 
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         deleteRequest = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:18082/usuarios/"+idUsuario))
+                .uri(new URI("http://"+ipAdress+"/usuarios/"+idUsuario))
                 .DELETE()
                 .build();
         httpResponse = httpClient.send(deleteRequest, HttpResponse.BodyHandlers.ofString());

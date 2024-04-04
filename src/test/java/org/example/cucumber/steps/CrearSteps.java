@@ -9,6 +9,7 @@ import com.networknt.schema.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.cucumber.model.UsuarioModel;
 import org.example.cucumber.validation.JsonValidator;
 import org.json.JSONObject;
@@ -50,9 +51,14 @@ public class CrearSteps {
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(usuario);
 
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         postRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(new URI("http://localhost:18082/usuarios"))
+                .uri(new URI("http://"+ipAdress+"/usuarios"))
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
 

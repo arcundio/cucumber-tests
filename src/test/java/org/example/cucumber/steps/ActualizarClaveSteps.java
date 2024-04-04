@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.cucumber.helperclasses.BearerTokenGenerator;
 import org.example.cucumber.model.UsuarioModel;
 import org.example.cucumber.validation.JsonValidator;
@@ -25,6 +26,8 @@ public class ActualizarClaveSteps {
     HttpRequest putRequest;
     HttpClient httpClient = HttpClient.newHttpClient();
     static HttpResponse<String> httpResponse;
+
+    String ipAdress;
 
 
     @Given("un id valido y un json valido del usuario")
@@ -53,10 +56,15 @@ public class ActualizarClaveSteps {
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(usuario);
 
+        Dotenv dotenv = Dotenv.load();
+
+        ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer "+jwtToken)
-                .uri(new URI("http://localhost:18082/usuarios/actualizarContraseña/"+idUsuario))
+                .uri(new URI("http://" + ipAdress + "/usuarios/actualizarContraseña/"+idUsuario))
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
 
@@ -94,9 +102,13 @@ public class ActualizarClaveSteps {
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(usuario);
 
+        Dotenv dotenv = Dotenv.load();
+        ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(new URI("http://localhost:18082/usuarios/actualizarContraseña/"+idUsuario))
+                .uri(new URI("http://"+ ipAdress + "/usuarios/actualizarContraseña/"+idUsuario))
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
 

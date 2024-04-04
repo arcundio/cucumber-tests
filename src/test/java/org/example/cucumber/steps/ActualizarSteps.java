@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.cucumber.helperclasses.BearerTokenGenerator;
 import org.example.cucumber.model.UsuarioModel;
 import org.example.cucumber.validation.JsonValidator;
@@ -51,10 +52,15 @@ public class ActualizarSteps {
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(usuario);
 
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer "+jwtToken)
-                .uri(new URI("http://localhost:18082/usuarios/"+idUsuario))
+                .uri(new URI("http://"+ ipAdress+ "/usuarios/"+idUsuario))
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
 
@@ -83,9 +89,15 @@ public class ActualizarSteps {
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(usuario);
 
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
+
         putRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(new URI("http://localhost:18082/usuarios/"+idUsuario))
+                .uri(new URI("http://"+ ipAdress+ "/usuarios/"+idUsuario))
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
 

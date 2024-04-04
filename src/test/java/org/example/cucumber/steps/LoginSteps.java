@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.cucumber.model.LoginDTO;
 import org.junit.jupiter.api.Assertions;
 
@@ -33,9 +34,15 @@ public class LoginSteps {
         loginDTO.setPassword(password);
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(loginDTO);
+
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         postRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(new URI("http://localhost:18082/login"))
+                .uri(new URI("http://"+ipAdress+"/login"))
                 .POST(BodyPublishers.ofString(jsonRequest))
                 .build();
     }
@@ -61,9 +68,15 @@ public class LoginSteps {
         loginDTO.setPassword("");
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(loginDTO);
+
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
         postRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(new URI("http://localhost:18082/login"))
+                .uri(new URI("http://"+ipAdress+"/login"))
                 .POST(BodyPublishers.ofString(jsonRequest))
                 .build();
 

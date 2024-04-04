@@ -3,6 +3,7 @@ package org.example.cucumber.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.cucumber.validation.JsonValidator;
 
 import java.io.IOException;
@@ -30,9 +31,15 @@ public class RecuperarSteps {
     @When("se envia una solicitud de recuperacion de contrasena")
     public void seEnviaUnaSolicitudDeRecuperacionDeContrasena() throws URISyntaxException, IOException, InterruptedException {
 
+        Dotenv dotenv = Dotenv.load();
+
+        String ipAdress = dotenv.get("target_ip");
+        ipAdress += "18082";
+
+
         postRequest = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(new URI("http://localhost:18082/usuarios/recuperarContraseña/"+email))
+                .uri(new URI("http://"+ipAdress+"/usuarios/recuperarContraseña/"+email))
                 .POST(HttpRequest.BodyPublishers.ofString(""))
                 .build();
 

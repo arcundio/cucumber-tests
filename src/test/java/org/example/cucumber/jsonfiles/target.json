@@ -1,1 +1,1 @@
-{"response":"Correo de recuperación enviado","error":false,"status":"OK"}
+{"response":"Se requiere un token JWT en la cabecera Authorization","error":true,"status":"UNAUTHORIZED"}
